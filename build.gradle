@@ -1,0 +1,58 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.google.protobuf:protobuf-gradle-plugin:0.8.8'
+        classpath 'org.springframework.boot:spring-boot-gradle-plugin:2.1.4.RELEASE'
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'application'
+apply plugin: 'com.google.protobuf'
+apply plugin: 'idea'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+mainClassName = 'ru.wallet.server.WalletServerApplication'
+
+repositories {
+    mavenCentral()
+}
+
+bootJar {
+    archiveBaseName = 'wallet-server'
+    version =  '0.0.1'
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+
+
+protobuf {
+    protoc {
+        artifact = "com.google.protobuf:protoc:3.7.1"
+    }
+    plugins {
+        grpc {
+            artifact = 'io.grpc:protoc-gen-grpc-java:1.21.0'
+        }
+    }
+    generateProtoTasks {
+        all()*.plugins {
+            grpc {}
+        }
+    }
+}
+
+dependencies {
+    //spring boot
+    compile("org.springframework.boot:spring-boot-starter-web:2.1.5.RELEASE")
+    compile("io.github.lognet:grpc-spring-boot-starter:3.0.0")
+    testCompile("org.springframework.boot:spring-boot-starter-test:2.1.5.RELEASE")
+
+    //for compatibility with java 9+
+    compile ("javax.annotation:javax.annotation-api:1.3.2")
+}

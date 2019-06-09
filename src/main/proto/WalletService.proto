@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+
+option java_multiple_files = true;
+
+import "google/protobuf/empty.proto";
+
+package ru.wallet.server;
+
+service WalletService {
+    rpc putDeposit (google.protobuf.Empty) returns (google.protobuf.Empty);
+    rpc takeDeposit (google.protobuf.Empty) returns (google.protobuf.Empty);
+    rpc getBalance (google.protobuf.Empty) returns (google.protobuf.Empty);
+}
