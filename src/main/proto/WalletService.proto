@@ -8,9 +8,10 @@ import "google/protobuf/empty.proto";
 package ru.wallet.server;
 
 service WalletService {
+    rpc createUser (google.protobuf.Empty) returns (User);
     rpc putDeposit (Deposit) returns (google.protobuf.Empty);
     rpc takeDeposit (Deposit) returns (google.protobuf.Empty);
-    rpc getBalance (User) returns (Balance);
+    rpc getBalance (User) returns (BalanceMap);
 }
 
 
@@ -18,18 +19,13 @@ message User {
     int64 userId = 1;
 }
 
-message Balance {
-    string balance = 1;
+message BalanceMap {
+    map<string, string> balance = 1;
 }
 
 message Deposit {
-    int64 userId = 1;
+    User user = 1;
     string amount = 2;
-    enum Currency {
-        EUR = 0;
-        USD = 1;
-        GPB = 2;
-    }
-    repeated Currency currency = 3;
+    string currency = 3;
 }
 
