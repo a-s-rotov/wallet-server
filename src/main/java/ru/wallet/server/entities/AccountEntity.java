@@ -5,7 +5,8 @@ import javax.persistence.*;
 import java.math.BigDecimal;
 
 @Entity
-@Table(uniqueConstraints = {@UniqueConstraint(columnNames = {"user_id", "type"})})
+@Table(uniqueConstraints = {@UniqueConstraint(columnNames = {"user_id", "type"})}, indexes = {
+        @Index(columnList = "user_id", name = "user_id_hidx")})
 public class AccountEntity extends BaseEntity {
 
 

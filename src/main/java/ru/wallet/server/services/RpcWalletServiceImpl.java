@@ -64,6 +64,8 @@ public class RpcWalletServiceImpl extends WalletServiceGrpc.WalletServiceImplBas
         try {
             dbWalletService.takeDeposit(request.getUser().getUserId(), new BigDecimal(request.getAmount()), Currency.valueOf(request.getCurrency()));
             responseObserver.onNext(Empty.newBuilder().build());
+            responseObserver.onCompleted();
+
         } catch (InvalidDataException invalidData) {
             responseObserver.onError(Status.INTERNAL
                     .withDescription(invalidData.getMessage()).asRuntimeException());
@@ -72,7 +74,6 @@ public class RpcWalletServiceImpl extends WalletServiceGrpc.WalletServiceImplBas
         } catch (NumberFormatException numberFormat) {
             throw new InvalidDataException("Amount is wrong");
         }
-        responseObserver.onCompleted();
     }
 
     @Override
