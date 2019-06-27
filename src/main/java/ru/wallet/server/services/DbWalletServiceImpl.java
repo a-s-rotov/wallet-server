@@ -40,7 +40,7 @@ public class DbWalletServiceImpl implements DbWalletService {
         accountUsd.setUser(user);
 
         AccountEntity accountGpb = new AccountEntity();
-        accountGpb.setType(Currency.GPB);
+        accountGpb.setType(Currency.GBP);
         accountGpb.setBalance(new BigDecimal(0));
         accountGpb.setUser(user);
 
