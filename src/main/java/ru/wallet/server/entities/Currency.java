@@ -1,5 +1,5 @@
 package ru.wallet.server.entities;
 
 public enum Currency {
-    EUR, USD, GPB
+    EUR, USD, GBP
 }
